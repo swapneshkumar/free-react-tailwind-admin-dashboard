@@ -3,9 +3,13 @@ import { Modal } from "../ui/modal";
 import Button from "../ui/button/Button";
 import Input from "../form/input/InputField";
 import Label from "../form/Label";
+import { useAuth } from "../../features/auth/AuthContext";
 
 export default function UserInfoCard() {
   const { isOpen, openModal, closeModal } = useModal();
+  const { login, getResponse } = useAuth();
+  const userResponse = getResponse();
+
   const handleSave = () => {
     // Handle save logic here
     console.log("Saving changes...");
@@ -25,7 +29,7 @@ export default function UserInfoCard() {
                 First Name
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                Musharof
+                {userResponse?.displayName || "Guest"}
               </p>
             </div>
 
@@ -151,10 +155,10 @@ export default function UserInfoCard() {
                     <Input type="text" value="Chowdhury" />
                   </div>
 
-                  <div className="col-span-2 lg:col-span-1">
+                  {/* <div className="col-span-2 lg:col-span-1">
                     <Label>Email Address</Label>
                     <Input type="text" value="randomuser@pimjo.com" />
-                  </div>
+                  </div> */}
 
                   <div className="col-span-2 lg:col-span-1">
                     <Label>Phone</Label>
